@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background: #fff;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        strong {
+            color: #007bff;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        a {
+            display: inline-block;
+            margin: 5px 0;
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script>
+        function toggleComments() {
+            const comments = document.getElementById('comments');
+            comments.style.display = comments.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
+</head>
+<body>
+    <h1>Results</h1>
+
+    <div>
+        <button onclick="toggleComments()">Show Comments</button>
+    </div>
+    <div id="comments" style="display: none;">
+        <ul>
+            {% for prediction in predictions %}
+                <li>
+                    <p><strong>Comment:</strong> {{ prediction.comment }}</p>
+                    <ul>
+                        {% for result in prediction.results %}
+                            <li>{{ result }}</li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+
+    {% if has_graph %}
+        <div>
+            <a href="/graph?youtube_url={{ youtube_url }}">
+                <button>Bar Graph</button>
+            </a>
+            <a href="/pie_chart?youtube_url={{ youtube_url }}">
+                <button>Pie Chart</button>
+            </a>
+            <a href="/heatmap">
+                <button>Accuracy Metrics</button>
+            </a>
+        </div>
+    {% endif %}
+
+    <a href="/">Analyze Another Video</a>
+</body>
+</html>
