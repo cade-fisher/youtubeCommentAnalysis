@@ -158,7 +158,7 @@ def index():
         video_id = get_video_id_from_url(youtube_url)
 
         if video_id:
-            api_key = 'AIzaSyCG_QR35l5S_B63kdSStS-yt9XcvEEJTko'
+            api_key = 'YOUR API'
             predictions, all_labels = predict_youtube_comments(video_id, api_key, max_results=50)
             return render_template('results.html', predictions=predictions, has_graph=True, youtube_url=youtube_url)
         else:
@@ -173,7 +173,7 @@ def display_graph():
     video_id = get_video_id_from_url(youtube_url)
 
     if video_id:
-        api_key = 'AIzaSyCG_QR35l5S_B63kdSStS-yt9XcvEEJTko'
+        api_key = 'YOUR API'
         _, all_labels = predict_youtube_comments(video_id, api_key, max_results=50)
         img = generate_bar_graph(all_labels)
         return send_file(img, mimetype='image/png')
@@ -187,7 +187,7 @@ def display_pie_chart():
     video_id = get_video_id_from_url(youtube_url)
 
     if video_id:
-        api_key = 'AIzaSyCG_QR35l5S_B63kdSStS-yt9XcvEEJTko'
+        api_key = 'YOUR API'
         _, all_labels = predict_youtube_comments(video_id, api_key, max_results=50)
         img = generate_pie_chart(all_labels)
         return send_file(img, mimetype='image/png')
